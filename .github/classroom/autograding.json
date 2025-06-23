@@ -1,0 +1,74 @@
+{
+  "tests": [
+    {
+      "name": "Show python versions",
+      "setup": "",
+      "run": "python src/python_versions.py",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 0
+    },
+    {
+      "name": "Test Assignment Notebook runs all cells cleanly",
+      "setup": "",
+      "run": "cd notebooks; jupyter nbconvert --execute Assg-08-Neural-Machine-Translation-and-Attention.ipynb --to notebook",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Task 1 test make_date_sequence_vectorizor",
+      "setup": "",
+      "run": "PYTHONPATH=$(pwd)/src python -m unittest test_assg_tasks.test_make_date_sequence_vectorizor",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 15
+    },
+    {
+      "name": "Task 2 test make_date_sequence_dataset",
+      "setup": "",
+      "run": "PYTHONPATH=$(pwd)/src python -m unittest test_assg_tasks.test_make_date_sequence_dataset",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 15
+    },
+    {
+      "name": "Task 3 test get_lstm_translator_model",
+      "setup": "",
+      "run": "PYTHONPATH=$(pwd)/src python -m unittest test_assg_tasks.test_get_lstm_translator_model",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 15
+    },
+    {
+      "name": "Task 4 test AttentionLayer",
+      "setup": "",
+      "run": "PYTHONPATH=$(pwd)/src python -m unittest test_assg_tasks.test_AttentionLayer",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 15
+    },
+    {
+      "name": "Task 5 test get_attention_translator_model",
+      "setup": "",
+      "run": "PYTHONPATH=$(pwd)/src python -m unittest test_assg_tasks.test_get_attention_translator_model",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 15
+    }
+  ]
+}
