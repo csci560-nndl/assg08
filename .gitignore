@@ -4,6 +4,7 @@
 *.vagrant/*
 .virtual_documents/*
 _trial_temp/*
+.Trash-1000/*
 
 *.acn
 *.swp

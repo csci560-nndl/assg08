@@ -20,11 +20,93 @@ jobs:
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
         echo $CONDA/bin >> $GITHUB_PATH
-    - name: Set pythonpath to get our assignment modules
+    - name: Set PYTHONPATH to see project modules
       run: |
          echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
     - name: Install dependencies
       run: |
         conda env update --file environment.yml --name base
-        python3 -m pip install tensorflow
-    - uses: education/autograding@v1
+
+    - name: Show Python versions
+      id: show-python-versions
+      uses: etamu-class/autograding-command-grader@v10
+      with:
+        test-name: 'Show Python versions'
+        setup-command: ''
+        command: 'python src/python_versions.py'
+        timeout: '10'
+        max-score: '0'
+
+    - name: Test Assignment Notebook runs all cells cleanly
+      id: test-assignment-notebook
+      uses: etamu-class/autograding-command-grader@v10
+      with:
+        test-name: 'Test Assignment Notebook'
+        working-directory: './notebooks'
+        setup-command: ''
+        command: 'jupyter nbconvert --execute Assg-08-Neural-Machine-Translation-and-Attention.ipynb --to notebook'
+        timeout: '10'
+        max-score: '10'
+
+    - name: Task 1 make_date_sequence_vectorizor()
+      id: test-task-1
+      uses: etamu-class/autograding-command-grader@v10
+      with:
+        test-name: 'Task 1 make_date_sequence_vectorizor()'
+        setup-command: ''
+        command: 'python -m unittest test_assg_tasks.test_make_date_sequence_vectorizor'
+        timeout: '10'
+        max-score: '15'
+
+    - name: Task 2 make_date_sequence_dataset()
+      id: test-task-2
+      uses: etamu-class/autograding-command-grader@v10
+      with:
+        test-name: 'Task 2 make_date_sequence_dataset()'
+        setup-command: ''
+        command: 'python -m unittest test_assg_tasks.test_make_date_sequence_dataset'
+        timeout: '10'
+        max-score: '15'
+
+    - name: Task 3 get_lstm_translator_model()
+      id: test-task-3
+      uses: etamu-class/autograding-command-grader@v10
+      with:
+        test-name: 'Task 3 get_lstm_translator_model()'
+        setup-command: ''
+        command: 'python -m unittest test_assg_tasks.test_get_lstm_translator_model'
+        timeout: '10'
+        max-score: '15'
+
+    - name: Task 4 AttentionLayer()
+      id: test-task-4
+      uses: etamu-class/autograding-command-grader@v10
+      with:
+        test-name: 'Task 4 AttentionLayer()'
+        setup-command: ''
+        command: 'python -m unittest test_assg_tasks.test_AttentionLayer'
+        timeout: '10'
+        max-score: '15'
+
+    - name: Task 5 get_attention_translator_model()
+      id: test-task-5
+      uses: etamu-class/autograding-command-grader@v10
+      with:
+        test-name: 'Task 5 get_attention_translator_model()'
+        setup-command: ''
+        command: 'python -m unittest test_assg_tasks.test_get_attention_translator_model'
+        timeout: '10'
+        max-score: '15'
+
+
+    - name: Autograding Reporter
+      uses: education/autograding-grading-reporter@v1
+      env:
+        TEST-ASSIGNMENT-NOTEBOOK_RESULTS: "${{steps.test-assignment-notebook.outputs.result}}"
+        TEST-TASK-1_RESULTS: "${{steps.test-task-1.outputs.result}}"
+        TEST-TASK-2_RESULTS: "${{steps.test-task-2.outputs.result}}"
+        TEST-TASK-3_RESULTS: "${{steps.test-task-3.outputs.result}}"
+        TEST-TASK-4_RESULTS: "${{steps.test-task-4.outputs.result}}"
+        TEST-TASK-5_RESULTS: "${{steps.test-task-5.outputs.result}}"
+      with:
+        runners: test-assignment-notebook,test-task-1,test-task-2,test-task-3,test-task-4,test-task-5
