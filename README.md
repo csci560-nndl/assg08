@@ -8,7 +8,7 @@ date: ''
 
 Welcome to our next assignment over Text/Sequence deep learning systems.  In this assignment you will be turning your attention to Machine Translation using an encoder / decoder, as we discussed in our class.  You are going
 to implement the translator using Keras LSTM recurrent layers.  But you will be adding neural attention
-mechansims by hand to your encoder / decoder, instead of using the Keras attention layers.
+mechanisms by hand to your encoder / decoder, instead of using the Keras attention layers.
 
 The model you will build here could be used to translate from one language to another, such as
 translating from English to Hindi.  However, language translation requires massive datasets and
